@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bio - พีท พีรพันธุ์</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(180deg, #d8b4fe 0%, #ffffff 100%);
+            --text-main: #333;
+            --text-sub: #888;
+        }
+
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        .window-container {
+            background: white;
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+            overflow: hidden;
+            position: relative;
+            z-index: 10;
+        }
+
+        .window-header {
+            padding: 10px 15px;
+            background: #fff;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .dots { display: flex; gap: 6px; }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .red { background: #ff5f56; }
+        .yellow { background: #ffbd2e; }
+        .green { background: #27c93f; }
+
+        .profile-section {
+            padding: 30px 25px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .avatar-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+            padding: 3px;
+        }
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            background: #e0e0e0;
+            border-radius: 18px;
+            border: 4px solid #fff;
+            background-image: url('https://cdn.phototourl.com/uploads/2026-02-04-525f548d-b2b2-4cb1-b28c-02f39430a850.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .profile-info h2 { margin: 0; font-size: 1.2rem; font-weight: 600; }
+        .profile-info p { margin: 5px 0; font-size: 0.8rem; color: var(--text-sub); }
+
+        .content-body { padding: 0 25px 30px; }
+        .section-title { font-size: 0.9rem; font-weight: 600; margin-bottom: 15px; }
+
+        .link-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn-link {
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .btn-link i { font-size: 1.2rem; }
+
+        .btn-link:active { transform: scale(0.9); }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #666;
+            cursor: default;
+        }
+
+        .fb { background-color: #4267B2; }
+        .ig { background: linear-gradient(90deg, #833ab4, #fd1d1d, #fcb045); }
+        .tk { background-color: #000; }
+        .dc { background-color: #5865F2; }
+
+        .description-box {
+            background: #f4f7f9;
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 20px;
+            border: 1px solid #eef2f5;
+        }
+        .code-style {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.75rem;
+            color: #4a90e2;
+            line-height: 1.4;
+        }
+
+        /* Transition Overlay - ตัวที่ทำให้จอเปลี่ยนสี */
+        #transition-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+            opacity: 0;
+        }
+        #transition-overlay.active { 
+            transform: translate(-50%, -50%) scale(200); 
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="window-container">
+    <div class="window-header">
+        <div class="dots">
+            <div class="dot red"></div>
+            <div class="dot yellow"></div>
+            <div class="dot green"></div>
+        </div>
+        <div style="font-size: 0.8rem; color: #555;">Profile</div>
+        <div style="font-size: 1.2rem; cursor: pointer;">☰</div>
+    </div>
+
+    <div class="profile-section">
+        <div class="avatar-box">
+            <div class="avatar-inner"></div>
+        </div>
+        <div class="profile-info">
+            <h2>นาย พีรพันธุ์ บุพศิริ พีท</h2>
+            <p>ชัดเจน ในเลนเรา <br> <span style="color:#aaa">หวานเจี๊ยบบ </span></p>
+        </div>
+    </div>
+
+    <div class="content-body">
+        <div class="section-title">Social Links</div>
+
+        <div class="link-row">
+            <a href="https://www.facebook.com/share/1CfTnMsZTc/" class="btn-link fb" data-color="#4267B2">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            <div class="btn-link btn-secondary">Facebook</div>
+        </div>
+
+        <div class="link-row">
+            <a href="https://www.instagram.com/pet3._it?igsh=MXJlZTNuN3VwZGU5Yg==" class="btn-link ig" data-color="#dc2743">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <div class="btn-link btn-secondary">Instagram</div>
+        </div>
+
+        <div class="link-row">
+            <a href="https://www.tiktok.com/@peeraphan_2007" class="btn-link tk" data-color="#000000">
+                <i class="fab fa-tiktok"></i>
+            </a>
+            <div class="btn-link btn-secondary">TikTok</div>
+        </div>
+
+        <div class="link-row">
+            <a href="https://discord.gg/WnkWesZ4b" class="btn-link dc" data-color="#5865F2">
+                <i class="fab fa-discord"></i>
+            </a>
+            <div class="btn-link btn-secondary">Discord</div>
+        </div>
+
+        <div class="description-box">
+            <div class="section-title" style="margin-bottom: 5px;">เจอได้</div>
+            <div class="code-style">
+                > Chou: No.999<br>
+                > Pen a rai mak mai<br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="transition-overlay"></div>
+
+<script>
+    const links = document.querySelectorAll('.btn-link[href]');
+    const overlay = document.getElementById('transition-overlay');
+
+    links.forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const color = this.getAttribute('data-color');
+            const target = this.href;
+            
+            // ตั้งค่าสีและตำแหน่งจุดเริ่ม
+            overlay.style.backgroundColor = color;
+            overlay.style.left = e.clientX + 'px';
+            overlay.style.top = e.clientY + 'px';
+            
+            // สั่งขยาย
+            overlay.classList.add('active');
+            
+            // ไปยังลิงก์หลังจากขยายเสร็จ (0.6 วินาที)
+            setTimeout(() => {
+                window.location.href = target;
+            }, 600);
+
+            // สำคัญ: รีเซ็ตวงกลมให้หายไปหลังจากที่มันขยายไปแล้ว 
+            // เพื่อที่เวลากดย้อนกลับมา (Back) จอจะได้ไม่ค้างสีนั้น
+            setTimeout(() => {
+                overlay.classList.remove('active');
+            }, 1200);
+        });
+    });
+
+    // ตรวจสอบเมื่อมีการกดย้อนกลับ (Back Button) ให้ลบสีที่ค้างอยู่ออกทันที
+    window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+            overlay.classList.remove('active');
+        }
+    });
+</script>
+
+</body>
+</html>
